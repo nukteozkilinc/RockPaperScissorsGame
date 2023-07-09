@@ -7,6 +7,8 @@ class GameViewController: ViewController {
     var gameState : GameState = .draw
     var myChoice : Game = .scissors
     var computerChoice : Game = .scissors
+    var imageArray : [UIImage] = []
+    
     
     @IBOutlet weak var myScoreLabel: UILabel!
     @IBOutlet weak var pcScoreLabel: UILabel!
@@ -128,9 +130,35 @@ class GameViewController: ViewController {
         self.view.addSubview(container)
         
         activityView.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 ) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8 ) {
             self.performSegue(withIdentifier: "GoToResult", sender: self)
             activityView.stopAnimating()
             }
+        
+        imageArray = createImgArray()
+        
+        
+        let image = UIImage()
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 160, y: 600, width: 80, height: 80)
+        view.addSubview(imageView)
+        animate(imageView: imageView, images: imageArray)
    }
+    
+    func createImgArray() -> [UIImage] {
+        imageArray = []
+        
+        imageArray.append(UIImage(named: "rock")!)
+        imageArray.append(UIImage(named: "paper")!)
+        imageArray.append(UIImage(named: "scissors")!)
+        
+        return imageArray
+    }
+    
+    func animate(imageView : UIImageView, images : [UIImage]) {
+        imageView.animationImages = images
+        imageView.animationDuration = 1.0
+        imageView.animationRepeatCount = 1
+        imageView.startAnimating()
+    }
 }
