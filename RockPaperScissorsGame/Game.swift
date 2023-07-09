@@ -1,8 +1,14 @@
-//
-//  Game.swift
-//  RockPaperScissorsGame
-//
-//  Created by Nukte Ozkilinc on 8.07.2023.
-//
-
 import Foundation
+
+enum Game : String {
+    case paper 
+    case rock
+    case scissors
+}
+
+
+enum GameState{
+    case win
+    case draw
+    case lose
+}
